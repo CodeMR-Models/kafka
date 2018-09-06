@@ -1,0 +1,127 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=UTF8">
+<link rel="icon" type="image/png" href="../main_report/html/assets/img/codemr-icon-black-1.png">
+<title>CodeMR Software Graph</title>                                            
+    <script type="text/javascript" src="../main_report/html/js/vis.js"></script>             
+    <link type="text/css" rel="stylesheet" href="../main_report/html/css/vis.css">         
+    <link type="text/css" rel="stylesheet" href="../main_report/html/css/graph.css">         
+    <link href='../main_report/html/fonts/font-codemr/css/codemr.css' rel='stylesheet' type='text/css'> 
+</head>                                                                           
+                                                                                  
+<body onload="network.redraw()">                                                                            
+<table style="width:100%">
+<tr>                                                                                                                                               
+	<td colspan="4">                                                                                                                                  
+	<div>                                                                                                                                               
+	<ul class="menubar">                                                                                                                                
+	  <li><a>CodeMR Graph</a></li>                                                                                                                    
+	  <li><a style="text-decoration:none" href="../main_report/index.html">Dashboard</a></li>
+	                                                                                                                                                    
+	  <li>Show Legend & Metric Chart</li>                                                                                                                
+	  <li>                                                                                                                                               
+	    <label class="switch">                                                                                                                           
+	      <input type="checkbox" class="showmetricchart" id="showmetricchart" name="showmetricchart" onclick='eQ.MetricChart.handleMBCheckBox(this);'>   
+	      <div class="slider round"></div>                                                                                                               
+	    </label>                                                                                                                                         
+	   </li>                                                                                                                                             
+	   <li><pre id="eventSpan" class="infobar"></pre></li>                                                                                               
+	</ul>                                                                                                                                                
+	</div>                                                                                                                                               
+	</td>                                                                                                                                                
+</tr>                                                                                                                                                   
+                                                                                                                                                        
+<tr>                                                                                                                                                    
+	<td align="left" colspan="3">                                                                                                                        
+		<div id="mynetwork"></div>                                                                                                                       
+	</td>                                                                                                                                                
+ 	<td align="left"   valign="top" colspan="1">                                                                                                         
+		<div id="metricchart" class="metricchart"  style="display: none;">                                                                               
+		<img src="../main_report/html/img/eqGraphlegend.png"> </img>                                                                                        
+		</div>                                                                                                                                           
+	</td>                                                                                                                                                
+</tr>                                                                                                                                                   
+	                                                                                                                                                     
+</table>    
+<link href='../main_report/html/css/barchartstyle.css' rel='stylesheet' type='text/css'> 
+<script src="../main_report/html/js/d3.min.js"></script>  
+<script src="../main_report/html/js/d3.tip.v0.6.3.js"></script>
+<script src="../main_report/html/js/eq.js"></script>
+<script src="../main_report/htmlx/modeldata/defaultclassmetrics.js"></script>
+<script src="../main_report/html/js/metricchart.js"></script>
+<script src="../main_report/htmlx/modeldata/sunburst_data.js"></script>
+<script>
+nodesData = [
+{id: 0,label: '',title: 'org.apache.kafka.connect.rest.ConnectRestExtension<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: '1',size: 20,color: '#007F24',x: 476,y: 648,shape: 'dot',a:1},
+{id: 1,label: '',title: 'org.apache.kafka.connect.header.Headers<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: high',key: 'uT',size: 40,color: '#62BF18',x: 1004,y: 577,shape: 'dot',a:1},
+{id: 2,label: '',title: 'org.apache.kafka.connect.source.SourceRecord<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'No',size: 40,color: '#62BF18',x: 333,y: 451,shape: 'dot',a:1},
+{id: 3,label: '',title: 'org.apache.kafka.connect.source.SourceTask<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low-medium',key: 'lf',size: 20,color: '#007F24',x: 330,y: 352,shape: 'dot',a:1},
+{id: 4,label: '',title: 'org.apache.kafka.connect.errors.AlreadyExistsException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'td',size: 20,color: '#FFC800',x: 653,y: 172,shape: 'dot',a:1},
+{id: 5,label: '',title: 'org.apache.kafka.connect.connector.ConnectorContext<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'FI',size: 20,color: '#007F24',x: 0,y: 339,shape: 'dot',a:1},
+{id: 6,label: '',title: 'org.apache.kafka.connect.storage.HeaderConverter<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'JA',size: 20,color: '#007F24',x: 1015,y: 77,shape: 'dot',a:1},
+{id: 7,label: '',title: 'org.apache.kafka.connect.sink.SinkTask<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'tw',size: 20,color: '#007F24',x: 308,y: 20,shape: 'dot',a:1},
+{id: 8,label: '',title: 'org.apache.kafka.connect.storage.ConverterConfig<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'sq',size: 20,color: '#62BF18',x: 1002,y: 309,shape: 'dot',a:1},
+{id: 9,label: '',title: 'org.apache.kafka.connect.source.SourceConnector<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'dW',size: 20,color: '#62BF18',x: 338,y: 541,shape: 'dot',a:1},
+{id: 10,label: '',title: 'org.apache.kafka.connect.data.Schema<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'N9',size: 40,color: '#007F24',x: 483,y: 479,shape: 'dot',a:1},
+{id: 11,label: '',title: 'org.apache.kafka.connect.errors.IllegalWorkerStateException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'I0',size: 20,color: '#FFC800',x: 661,y: 127,shape: 'dot',a:1},
+{id: 12,label: '',title: 'org.apache.kafka.connect.errors.RetriableException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'nf',size: 20,color: '#FFC800',x: 665,y: 301,shape: 'dot',a:1},
+{id: 13,label: '',title: 'org.apache.kafka.connect.connector.Connector<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low-medium',key: 'rv',size: 20,color: '#62BF18',x: 124,y: 424,shape: 'dot',a:1},
+{id: 14,label: '',title: 'org.apache.kafka.connect.errors.ConnectException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'Gt',size: 20,color: '#FFC800',x: 459,y: 172,shape: 'dot',a:1},
+{id: 15,label: '',title: 'org.apache.kafka.connect.sink.SinkRecord<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'Js',size: 20,color: '#62BF18',x: 314,y: 104,shape: 'dot',a:1},
+{id: 16,label: '',title: 'org.apache.kafka.connect.data.SchemaBuilder<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: medium-high',key: 'Ie',size: 40,color: '#FFC800',x: 600,y: 419,shape: 'dot',a:1},
+{id: 17,label: '',title: 'org.apache.kafka.connect.storage.Converter<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'g0',size: 20,color: '#007F24',x: 1025,y: 195,shape: 'dot',a:1},
+{id: 18,label: '',title: 'org.apache.kafka.connect.data.ConnectSchema<br>Coupling: low-medium<br>Complexity: medium-high<br>Lack of Cohesion: medium-high',key: 'Aw',size: 40,color: '#FFC800',x: 617,y: 549,shape: 'triangle',a:1},
+{id: 19,label: '',title: 'org.apache.kafka.connect.storage.SimpleHeaderConverter<br>Coupling: low-medium<br>Complexity: medium-high<br>Lack of Cohesion: low-medium',key: 'b8',size: 20,color: '#FFC800',x: 1190,y: 10,shape: 'triangle',a:1},
+{id: 20,label: '',title: 'org.apache.kafka.connect.errors.NotFoundException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'f5',size: 20,color: '#FFC800',x: 660,y: 228,shape: 'dot',a:1},
+{id: 21,label: '',title: 'org.apache.kafka.connect.storage.StringConverterConfig<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'nY',size: 20,color: '#62BF18',x: 1175,y: 309,shape: 'dot',a:1},
+{id: 22,label: '',title: 'org.apache.kafka.connect.health.TaskState<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'Pu',size: 20,color: '#62BF18',x: 889,y: 542,shape: 'dot',a:1},
+{id: 23,label: '',title: 'org.apache.kafka.connect.components.Versioned<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'eW',size: 20,color: '#007F24',x: 329,y: 642,shape: 'dot',a:1},
+{id: 24,label: '',title: 'org.apache.kafka.connect.header.Header<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'Jk',size: 20,color: '#007F24',x: 1016,y: 441,shape: 'dot',a:1},
+{id: 25,label: '',title: 'org.apache.kafka.connect.errors.SchemaProjectorException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'DH',size: 20,color: '#FFC800',x: 808,y: 80,shape: 'dot',a:1},
+{id: 26,label: '',title: 'org.apache.kafka.connect.health.ConnectorState<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'Pr',size: 20,color: '#62BF18',x: 887,y: 428,shape: 'dot',a:1},
+{id: 27,label: '',title: 'org.apache.kafka.connect.connector.ConnectRecord<R><br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low-medium',key: 'Jv',size: 40,color: '#62BF18',x: 113,y: 338,shape: 'dot',a:1},
+{id: 28,label: '',title: 'org.apache.kafka.connect.errors.SchemaBuilderException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'Lv',size: 20,color: '#FFC800',x: 818,y: 0,shape: 'dot',a:1},
+{id: 29,label: '',title: 'org.apache.kafka.connect.connector.Task<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'Pw',size: 20,color: '#007F24',x: 110,y: 244,shape: 'dot',a:1},
+{id: 30,label: '',title: 'org.apache.kafka.connect.sink.SinkConnector<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'm7',size: 20,color: '#62BF18',x: 319,y: 209,shape: 'dot',a:1},
+{id: 31,label: '',title: 'org.apache.kafka.connect.header.ConnectHeader<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low-medium',key: 'Nj',size: 20,color: '#007F24',x: 1158,y: 441,shape: 'dot',a:1},
+{id: 32,label: '',title: 'org.apache.kafka.connect.storage.StringConverter<br>Coupling: low-medium<br>Complexity: low<br>Lack of Cohesion: low-medium',key: 'HN',size: 20,color: '#007F24',x: 1121,y: 148,shape: 'triangle',a:1},
+{id: 33,label: '',title: 'org.apache.kafka.connect.errors.DataException<br>Coupling: low<br>Complexity: medium-high<br>Lack of Cohesion: low',key: 'QI',size: 20,color: '#FFC800',x: 653,y: 38,shape: 'dot',a:1},
+{id: 34,label: '',title: 'org.apache.kafka.connect.health.AbstractState<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'n.',size: 20,color: '#007F24',x: 740,y: 496,shape: 'dot',a:1},
+{id: 35,label: '',title: 'org.apache.kafka.connect.header.ConnectHeaders<br>Coupling: medium-high<br>Complexity: very-high<br>Lack of Cohesion: high',key: 'kq',size: 60,color: '#E50000',x: 1152,y: 575,shape: 'square',a:1}
+];
+edgesData = [
+{from: 33,to: 14,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 13,to: 23,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 7,to: 29,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 22,to: 34,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 11,to: 14,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 2,to: 27,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 21,to: 8,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 32,to: 17,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 15,to: 27,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 12,to: 14,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 25,to: 33,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 0,to: 23,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 18,to: 10,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 9,to: 13,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 32,to: 6,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 35,to: 1,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 5,to: 5,color: '#FFFFFF',width: 0,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 28,to: 33,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 4,to: 14,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 19,to: 6,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 26,to: 34,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 30,to: 13,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 3,to: 29,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 20,to: 14,color: '#FF9800',width: 2,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 31,to: 24,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 16,to: 10,color: '#259B24',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1}
+];
+clusters = [["11","20","12","4","14","25","33","28"],["19","21","32","6","8","17"],["2","3","9"],["13","5","27","29"],["30","7","15"],["22","26","34"],["1","31","24","35"],["10","16","18"],["0"],["23"]];
+clustersBounds = [{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20}];
+
+</script>            
+<script type="text/javascript" src="../main_report/html/js/vis_eq_cluster.js"></script>    
+<script type="text/javascript" src="../main_report/html/js/vis_eq_graph_base.js"></script>    
+</body>                                                                           
+                                                                                  
+                                                                                  
+</html>                                                                           

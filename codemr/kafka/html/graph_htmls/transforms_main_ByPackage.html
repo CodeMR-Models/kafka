@@ -1,0 +1,110 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=UTF8">
+<link rel="icon" type="image/png" href="../main_report/html/assets/img/codemr-icon-black-1.png">
+<title>CodeMR Software Graph</title>                                            
+    <script type="text/javascript" src="../main_report/html/js/vis.js"></script>             
+    <link type="text/css" rel="stylesheet" href="../main_report/html/css/vis.css">         
+    <link type="text/css" rel="stylesheet" href="../main_report/html/css/graph.css">         
+    <link href='../main_report/html/fonts/font-codemr/css/codemr.css' rel='stylesheet' type='text/css'> 
+</head>                                                                           
+                                                                                  
+<body onload="network.redraw()">                                                                            
+<table style="width:100%">
+<tr>                                                                                                                                               
+	<td colspan="4">                                                                                                                                  
+	<div>                                                                                                                                               
+	<ul class="menubar">                                                                                                                                
+	  <li><a>CodeMR Graph</a></li>                                                                                                                    
+	  <li><a style="text-decoration:none" href="../main_report/index.html">Dashboard</a></li>
+	                                                                                                                                                    
+	  <li>Show Legend & Metric Chart</li>                                                                                                                
+	  <li>                                                                                                                                               
+	    <label class="switch">                                                                                                                           
+	      <input type="checkbox" class="showmetricchart" id="showmetricchart" name="showmetricchart" onclick='eQ.MetricChart.handleMBCheckBox(this);'>   
+	      <div class="slider round"></div>                                                                                                               
+	    </label>                                                                                                                                         
+	   </li>                                                                                                                                             
+	   <li><pre id="eventSpan" class="infobar"></pre></li>                                                                                               
+	</ul>                                                                                                                                                
+	</div>                                                                                                                                               
+	</td>                                                                                                                                                
+</tr>                                                                                                                                                   
+                                                                                                                                                        
+<tr>                                                                                                                                                    
+	<td align="left" colspan="3">                                                                                                                        
+		<div id="mynetwork"></div>                                                                                                                       
+	</td>                                                                                                                                                
+ 	<td align="left"   valign="top" colspan="1">                                                                                                         
+		<div id="metricchart" class="metricchart"  style="display: none;">                                                                               
+		<img src="../main_report/html/img/eqGraphlegend.png"> </img>                                                                                        
+		</div>                                                                                                                                           
+	</td>                                                                                                                                                
+</tr>                                                                                                                                                   
+	                                                                                                                                                     
+</table>    
+<link href='../main_report/html/css/barchartstyle.css' rel='stylesheet' type='text/css'> 
+<script src="../main_report/html/js/d3.min.js"></script>  
+<script src="../main_report/html/js/d3.tip.v0.6.3.js"></script>
+<script src="../main_report/html/js/eq.js"></script>
+<script src="../main_report/htmlx/modeldata/defaultclassmetrics.js"></script>
+<script src="../main_report/html/js/metricchart.js"></script>
+<script src="../main_report/htmlx/modeldata/sunburst_data.js"></script>
+<script>
+nodesData = [
+{id: 0,label: '',title: 'org.apache.kafka.connect.transforms.RegexRouter<R><br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'Lt',size: 20,color: '#007F24',x: 668,y: 618,shape: 'dot',a:1},
+{id: 1,label: '',title: 'org.apache.kafka.connect.transforms.util.SimpleConfig<br>Coupling: low<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'Ra',size: 20,color: '#62BF18',x: 184,y: 694,shape: 'dot',a:1},
+{id: 2,label: '',title: 'org.apache.kafka.connect.transforms.util.SchemaUtil<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'jH',size: 20,color: '#007F24',x: 168,y: 220,shape: 'dot',a:1},
+{id: 3,label: '',title: 'org.apache.kafka.connect.transforms.ExtractField<R><br>Coupling: low-medium<br>Complexity: low<br>Lack of Cohesion: low',key: 'DJ',size: 40,color: '#007F24',x: 666,y: 562,shape: 'triangle',a:1},
+{id: 4,label: '',title: 'org.apache.kafka.connect.transforms.util.RegexValidator<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'xG',size: 20,color: '#007F24',x: 0,y: 348,shape: 'dot',a:1},
+{id: 5,label: '',title: 'org.apache.kafka.connect.transforms.SetSchemaMetadata<R><br>Coupling: low-medium<br>Complexity: low<br>Lack of Cohesion: low',key: 'L3',size: 40,color: '#007F24',x: 663,y: 676,shape: 'triangle',a:1},
+{id: 6,label: '',title: 'org.apache.kafka.connect.transforms.InsertField<R><br>Coupling: medium-high<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'Oa',size: 40,color: '#62BF18',x: 662,y: 84,shape: 'square',a:1},
+{id: 7,label: '',title: 'org.apache.kafka.connect.transforms.MaskField<R><br>Coupling: low-medium<br>Complexity: low<br>Lack of Cohesion: low',key: 'Pm',size: 40,color: '#007F24',x: 667,y: 353,shape: 'triangle',a:1},
+{id: 8,label: '',title: 'org.apache.kafka.connect.transforms.util.NonEmptyListValidator<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'jK',size: 20,color: '#007F24',x: 11,y: 587,shape: 'dot',a:1},
+{id: 9,label: '',title: 'org.apache.kafka.connect.transforms.TimestampConverter<R><br>Coupling: medium-high<br>Complexity: low-medium<br>Lack of Cohesion: low-medium',key: 'Lm',size: 40,color: '#62BF18',x: 670,y: 271,shape: 'square',a:1},
+{id: 10,label: '',title: 'org.apache.kafka.connect.transforms.util.Requirements<br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'Z',size: 20,color: '#007F24',x: 162,y: 330,shape: 'dot',a:1},
+{id: 11,label: '',title: 'org.apache.kafka.connect.transforms.Flatten<R><br>Coupling: medium-high<br>Complexity: medium-high<br>Lack of Cohesion: medium-high',key: 'OJ',size: 40,color: '#FFC800',x: 668,y: 429,shape: 'square',a:1},
+{id: 12,label: '',title: 'org.apache.kafka.connect.transforms.TimestampRouter<R><br>Coupling: low<br>Complexity: low<br>Lack of Cohesion: low',key: 'et',size: 20,color: '#007F24',x: 606,y: 755,shape: 'dot',a:1},
+{id: 13,label: '',title: 'org.apache.kafka.connect.transforms.ReplaceField<R><br>Coupling: medium-high<br>Complexity: low-medium<br>Lack of Cohesion: medium-high',key: 'mx',size: 40,color: '#62BF18',x: 662,y: 192,shape: 'square',a:1},
+{id: 14,label: '',title: 'org.apache.kafka.connect.transforms.Cast<R><br>Coupling: medium-high<br>Complexity: medium-high<br>Lack of Cohesion: medium-high',key: 'M3',size: 40,color: '#FFC800',x: 664,y: 0,shape: 'square',a:1},
+{id: 15,label: '',title: 'org.apache.kafka.connect.transforms.HoistField<R><br>Coupling: low-medium<br>Complexity: low<br>Lack of Cohesion: low',key: 'Et',size: 40,color: '#007F24',x: 713,y: 834,shape: 'triangle',a:1},
+{id: 16,label: '',title: 'org.apache.kafka.connect.transforms.ValueToKey<R><br>Coupling: low-medium<br>Complexity: low-medium<br>Lack of Cohesion: low',key: 'GC',size: 20,color: '#62BF18',x: 662,y: 488,shape: 'triangle',a:1}
+];
+edgesData = [
+{from: 5,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 9,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 3,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 13,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 6,to: 2,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 5,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 7,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 4,to: 4,color: '#FFFFFF',width: 0,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 16,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 14,to: 2,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 13,to: 2,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 9,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 12,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 14,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 0,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 15,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 8,to: 8,color: '#FFFFFF',width: 0,arrows:{to:{scaleFactor:0.5}},dashes:false,a:1},
+{from: 9,to: 2,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 16,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 11,to: 2,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 6,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 14,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 7,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 11,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 3,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 13,to: 10,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 11,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1},
+{from: 6,to: 1,color: '#B6AFB2',width: 1,arrows:{to:{scaleFactor:0.5}},dashes:[5],a:1}
+];
+clusters = [["0","3","5","6","7","9","11","12","13","14","15","16"],["1","2","10","4","8"]];
+clustersBounds = [{minX: 0, minY: 0,maxX: 20, maxY: 20},{minX: 0, minY: 0,maxX: 20, maxY: 20}];
+
+</script>            
+<script type="text/javascript" src="../main_report/html/js/vis_eq_cluster.js"></script>    
+<script type="text/javascript" src="../main_report/html/js/vis_eq_graph_base.js"></script>    
+</body>                                                                           
+                                                                                  
+                                                                                  
+</html>                                                                           
