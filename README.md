@@ -1,6 +1,13 @@
 CodeMR Report for Apache Kafka
 =================
-See our [web site](https://www.codemr.co.uk) for details on the CodeMR.
+
+
+You can clone the project and use extracted module and graphs with [CodeMR Eclipse](https://marketplace.eclipse.org/content/codemr-software-quality-tool) or [IntelliJ Plugin](https://plugins.jetbrains.com/plugin/10811-codemr). 
+
+CodeMR model path: ./codemr/kafka/kafka.mdl
+
+See CodeMR [web site](https://www.codemr.co.uk) for details on the CodeMR.
+
 
 ### Snapshots ###
 
@@ -10,37 +17,37 @@ See our [web site](https://www.codemr.co.uk) for details on the CodeMR.
 #### All Kafka modules (except the common module) #### 
 ![AllModules except the common module ](codemr/kafka/snapshots/AllModulesExcludeCommons.png)
 
-#### All Kafka modules with inheritance and attribute relation#### 
+#### All Kafka modules with inheritance and attribute relation #### 
 ![All ModulesInheritanceAttribute](codemr/kafka/snapshots/AllModulesInheritanceAttribute.png)
 
 
 #### API Module #### 
 ![APIModule](codemr/kafka/snapshots/APIModule.png)
 
-#### APIModuleInheritance #### 
+#### API Module with Inheritance Relations #### 
 ![APIModuleInheritance](codemr/kafka/snapshots/APIModuleInheritance.png)
 
 #### Core Module #### 
 ![CoreByPackage](codemr/kafka/snapshots/CoreByPackage.png)
 
-#### CoreInheritance #### 
+#### Core Module Inheritance Relations #### 
 ![CoreInheritance](codemr/kafka/snapshots/CoreInheritance.png)
 
-#### CoreModuleComplexityTreeMap #### 
+#### Core Module Complexity TreeMap View #### 
 ![CoreModuleComplexityTreeMap](codemr/kafka/snapshots/CoreModuleComplexityTreeMap.png)
 
-#### PackageStructure-Coupling #### 
+#### Package Structure Coupling View #### 
 ![PackageStructure-Coupling](codemr/kafka/snapshots/PackageStructure-Coupling.png)
 
-#### RuntimeModule #### 
+#### Runtime Module #### 
 ![RuntimeModule](codemr/kafka/snapshots/RuntimeModule.png)
 
-#### RuntimeModuleComplexitySunburst #### 
+#### Runtime Module Complexity Sunburst View #### 
 ![RuntimeModuleComplexitySunburst](codemr/kafka/snapshots/RuntimeModuleComplexitySunburst.png)
 
-#### ToolsModule #### 
+#### Tools Module #### 
 ![ToolsModule](codemr/kafka/snapshots/ToolsModule.png)
 
-#### ToolsModuleInheritance #### 
+#### Tools Module Inheritance Relations #### 
 ![ToolsModuleInheritance](codemr/kafka/snapshots/ToolsModuleInheritance.png)
 
